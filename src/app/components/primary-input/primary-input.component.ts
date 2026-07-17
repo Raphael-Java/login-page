@@ -28,10 +28,10 @@ export class PrimaryInputComponent implements ControlValueAccessor {
   @Input() label = "";
   @Input() inputName = "";
 
-  value = "";
-
-  onChange = (_: string) => {};
-  onTouched = () => {};
+  value: string =  ""
+  onChange: any = () => {}
+  onTouched: any = () => {}
+  
 
   onInput(event: Event) {
     const value = (event.target as HTMLInputElement).value;
