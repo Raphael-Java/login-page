@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, InjectionToken } from '@angular/core';
 import { Router } from '@angular/router';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { LoginService } from '../../services/login.service';
+import { ToastService } from '../../services/toast.service';
+
 
 @Component({
   selector: 'app-login',
@@ -25,7 +27,8 @@ export class LoginComponent {
 
   constructor(
     private router: Router, // <-- added comma here
-    private loginService: LoginService
+    private loginService: LoginService,
+    private toastService: ToastService
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -35,8 +38,8 @@ export class LoginComponent {
 
   submit() {
     this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-      next: () => console.log("success"),
-      error: () => console.log("error")
+      next: () => this.toastService.success("Login feito com suceso"),
+      error: () => this.toastService.error("Erro inesperado! Tente novamente mais tarde")
     });
   }
 
