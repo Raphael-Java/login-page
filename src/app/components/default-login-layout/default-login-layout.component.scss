@@ -16,13 +16,17 @@ main {
     }
 
     .main-section {
+        justify-content: center;
         gap: 8px;
-
         flex-grow: 1;
         background-color: $gray-bg;
+        background-image: url('/assets/svg/skatepark_light.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
 
         img {
-            max-width: 400px; // Ajuste esse valor como preferir
+            max-width: 400px; 
             width: 100%;      // Faz com que ela seja responsiva
             height: auto;     // Mantém a proporção
         }
@@ -30,10 +34,13 @@ main {
 
     .form-section {
         flex-grow: 0.2;
-        padding: 0 20px;
+        padding: 40px 20px;
+        justify-content: flex-start; 
+        overflow-y: auto;
 
         img {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            flex-shrink: 0;
         }
 
         h2 {
@@ -49,7 +56,7 @@ main {
             align-items: center;
             justify-content: center;
             width: 100%;
-            gap: 30px;
+            gap: 12px;
 
             .divider {
                 display: flex;
@@ -85,14 +92,15 @@ main {
                 }
     
                 &.btn-primary {
-                    background-color: $primary-color;
-                    color:white;
-                    box-shadow:0px 8px 12px rgba(148.23004603385925, 64.33935597538948, 255, 0.20000000298023224);
-                    }
+                    background-color: #000000; 
+                    color: #ffffff;            
+                    box-shadow: none;
+                }
     
                 &.btn-secondary {
-                    border: 1px solid $primary-color;
-                    color: $primary-color;
+                    background-color: #000000; 
+                    border: 1px solid #000000;  
+                    color: #ffffff;
                 }
             }
         }

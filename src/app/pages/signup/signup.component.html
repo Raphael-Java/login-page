@@ -1,5 +1,5 @@
 <app-default-login-layout
-    title="Sign in and start today"
+    title="SIGN IN AND START TODAY"
     primaryBtnText="Signup Now"
     secondaryBtnText="Login Now"
     (submit)="submit()" 
@@ -9,23 +9,33 @@
 
 <form [formGroup]="signupForm">
     <app-primary-input
-
         formControlName="name"
         inputName="name"
         type="text"
-        label="yourName"
+        label="Your Name"
         placeholder="John Doe"
+    >
+    </app-primary-input>
 
-
+    <app-primary-input
         formControlName="email"
         inputName="email"
         type="email"
         label="Email"
         placeholder="johndoe@gmail.com"
-
     >
         <img src="/assets/svg/email-icon.svg" alt="">
     </app-primary-input>
+
+    <app-primary-input
+        formControlName="passwordConfirm"
+        inputName="passwordConfirm"
+        type="password"
+        label="Confirm your Password" 
+    >
+        <img src="/assets/svg/password.svg" alt="">
+    </app-primary-input>
+
     <app-primary-input
         formControlName="passwordConfirm"
         inputName="passwordConfirm"

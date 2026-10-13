@@ -1,4 +1,4 @@
-import { Component, InjectionToken } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -6,12 +6,11 @@ import { PrimaryInputComponent } from '../../components/primary-input/primary-in
 import { LoginService } from '../../services/login.service';
 import { ToastService } from '../../services/toast.service';
 
-
-interface SignupForm{
-  name: FormControl,
-  email: FormControl,
-  password: FormControl,
-  passwordConfirm: FormControl 
+interface SignupForm {
+  name: FormControl;
+  email: FormControl;
+  password: FormControl;
+  passwordConfirm: FormControl;
 }
 
 @Component({
@@ -22,10 +21,9 @@ interface SignupForm{
     ReactiveFormsModule,
     PrimaryInputComponent,
   ],
-
   providers: [
     LoginService
-  ], // <-- added comma here
+  ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
@@ -33,7 +31,7 @@ export class SignupComponent {
   signupForm!: FormGroup<SignupForm>;
 
   constructor(
-    private router: Router, // <-- added comma here
+    private router: Router,
     private loginService: LoginService,
     private toastService: ToastService
   ) {
@@ -46,8 +44,18 @@ export class SignupComponent {
   }
 
   submit() {
-    this.loginService.login(this.signupForm.value.email, this.signupForm.value.password).subscribe({
-      next: () => this.toastService.success("Login feito com suceso"),
+    const { name, email, password, passwordConfirm } = this.signupForm.value;
+
+    if (password !== passwordConfirm) {
+      this.toastService.error("As senhas não coincidem!");
+      return;
+    }
+
+    this.loginService.signup(name, email, password).subscribe({
+      next: () => {
+        this.toastService.success("Conta criada com sucesso!");
+        this.router.navigate(["login"]);
+      },
       error: () => this.toastService.error("Erro inesperado! Tente novamente mais tarde")
     });
   }
